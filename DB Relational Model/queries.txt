@@ -1,0 +1,145 @@
+DONE!
+QUERY #1A ------ TO PRINT OUT A TABLE FROM DATABASE
+(index.php)
+SELECT Members.IGN, Positions.Position, Members.Thlvl, Members.TeleName
+FROM Members JOIN Positions
+ON Members.PositionID = Positions.PositionID
+ORDER BY Members.PositionID ASC, Members.Thlvl DESC
+
+QUERY #2 -----------
+(addmember.php - Adds a member to the database)
+INSERT INTO Members(IGN, PositionID, Thlvl, TeleName, Bio, Strategies) VALUES ($name, $pos_ID, $th, $te, $bi, $st);
+
+QUERY #3 -----------
+(delmember.php - This deletes a member from database)
+DELETE FROM Members WHERE Members.MemberID = "$name";
+
+QUERY #4 -----------
+(donations.php)
+// ORDERED BY Net Donations:
+
+SELECT Members.IGN, Donations.Donated, Donations.Received, Donations.Net, Dates.Date
+FROM Members JOIN Donations JOIN Dates
+ON Members.MemberID = Donations.MemberID
+and Donations.DateID = Dates.DateID
+ORDER BY Donations.DateID DESC, Donations.Net DESC;
+
+//ORDERED BY Donations
+SELECT Members.IGN, Donations.Donated, Donations.Received, Donations.Net, Dates.Date
+FROM Members JOIN Donations JOIN Dates
+ON Members.MemberID = Donations.MemberID
+and Donations.DateID = Dates.DateID
+ORDER BY Donations.DateID DESC, Donations.Donated DESC;
+
+//ORDERED BY Received
+SELECT Members.IGN, Donations.Donated, Donations.Received, Donations.Net, Dates.Date
+FROM Members JOIN Donations JOIN Dates
+ON Members.MemberID = Donations.MemberID
+and Donations.DateID = Dates.DateID
+ORDER BY Donations.DateID DESC, Donations.Received DESC;
+
+
+//Inserting dates
+Find dates via the following command:
+
+SELECT Dates.DateID FROM Dates WHERE Dates.Date == $Date
+
+//If no row found, prevent insertion of donations.
+//After selecting date ID, store DateID in the variable $ID.
+
+Use JQuery to do the following:
+Insert Donations Here:
+count = 0;
+#while (count < 50) // Input maximum 50 entries at one go
+For each count, there is a form:
+Member: (which will be using JSON for user to select possible choices via dropdown based on input) Donated: (Int) Received: (Int)
+    count++;
+#endwhile
+
+For all entries, compute NET = Donated - Received
+INSERT INTO Donations (MemberID, DateID, Donated, Received, NET) VALUES ((SELECT Members.MemberID WHERE Members.IGN = $name), $ID, $don, $rec, $net)
+
+
+QUERY #5 - Add Clan Games score ----------------------
+(Similar to Donations)
+To see the clan game score for all members, see the following:
+
+// ORDERED BY Decreasing Points:
+SELECT Members.IGN, ClanGames.Points, Dates.Date
+FROM Members JOIN ClanGames JOIN Dates
+ON Members.MemberID = ClanGames.MemberID
+and ClanGames.DateID = Dates.DateID
+ORDER BY ClanGames.DateID DESC, ClanGames.Points DESC;
+
+//ORDERED BY Increasing points
+SELECT Members.IGN, ClanGames.Points, Dates.Date
+FROM Members JOIN ClanGames JOIN Dates
+ON Members.MemberID = ClanGames.MemberID
+and ClanGames.DateID = Dates.DateID
+ORDER BY ClanGames.DateID DESC, ClanGames.Points ASC;
+
+//To add Points into DB
+--> first input month into column, accept only months in DB
+
+SELECT Dates.DateID FROM Dates WHERE Dates.Date == $Date
+
+//After a valid date is entered, enter donations for that month and insert it  via the following command:
+INSERT INTO ClanGames (DateID, MemberID, Points) VALUES ($date, (SELECT Members.MemberID FROM Members WHERE Members.IGN = $name), $pts);
+
+QUERY #6 - Add Clan War count ------------------------------
+This page will first ask a user to enter the month and it will verify date entered based on the month, with the following code:
+
+SELECT Dates.DateID FROM Dates WHERE Dates.Date = "$date"
+
+If no rows are found, the user should see "No records found" and an option to return.
+
+If rows are found, the clan war count should be displayed in the format of a table. A plus "+" button should be there to increase a player's war count by 1. The + button contains the value of the MemberID of the player, and increases the count by 1 upon confirmation via the following query:
+
+UPDATE ClanWars SET Count = Count + 1 WHERE ClanWars.MemberID = $MemID and ClanWars.DateID = Dates.DateID;
+
+QUERY #7A - Promote Member---------------
+SQL Command:
+If PositionID  == 3 or 2,
+UPDATE Members SET PositionID = PositionID-1 WHERE Members.MemberID = $MemID;
+
+QUERY #7B - Demote Member ---------------
+SQL Command:
+If Position ID == 1 or 2,
+UPDATE Members SET PositionID = PositionID+1 WHERE Members.MemberID = $MemID;
+
+QUERY #7C - Edit Member Profile ----------
+(editmember.php)
+Form about the same as the add user portion. edit sends a GET parameter using the MemberID
+SELECT Members.IGN, Members.Thlvl, Members.TeleName, Members.Bio, Members.Strategies FROM Members WHERE Members.MemberID = $MemID;
+
+//And fill these inputs into the same form.
+Reinsert these values into the database upon updating.
+UPDATE Members SET IGN = $name, Thlvl = $th, TeleName = $tele, Bio = $bi, Strategies = $st WHERE Members.MemberID = $MemID;
+
+
+QUERY #8 - Clan War, Donation, Clan Games score by month ---------------
+(about.php)
+SELECT Dates.Date, ClanWars.Count, Donations.Donated, Donations.Received, Donations.Net, ClanGames.Points
+FROM ClanWars JOIN Donations JOIN ClanGames JOIN Dates
+ON ClanWars.MemberID = $_POST
+and Donations.MemberID = ClanGames.MemberID
+WHERE ClanWars.MemberID = $_POST['MemberID']
+ORDER BY Dates.DateID ASC
+
+SELECT Dates.Date, ClanWars.Count, Donations.Donated, Donations.Received, Donations.Net, ClanGames.Points
+FROM Dates
+JOIN ClanWars ON Dates.DateID = ClanWars.DateID
+JOIN Donations ON ClanWars.DateID = Donations.DateID AND ClanWars.MemberID = Donations.MemberID
+JOIN ClanGames ON Donations.DateID = ClanGames.DateID AND Donations.MemberID = ClanGames.MemberID
+WHERE ClanGames.MemberID = "2" ORDER BY Dates.DateID ASC
+
+//To debug
+SELECT Dates.Date, ClanWars.Count, Donations.Donated, Donations.Received, Donations.Net, ClanGames.Points, Dates.DateID, ClanWars.DateID, ClanGames.DateID, Donations.DateID FROM Dates JOIN ClanWars ON Dates.DateID = ClanWars.DateID JOIN Donations ON ClanWars.MemberID = Donations.MemberID JOIN ClanGames ON Donations.MemberID = ClanGames.MemberID WHERE ClanGames.MemberID = "2" ORDER BY Dates.DateID ASC
+
+//To debug too
+SELECT Dates.Date, ClanWars.Count, Donations.Donated, Donations.Received, Donations.Net, ClanGames.Points, Dates.DateID, ClanWars.DateID, ClanGames.DateID, Donations.DateID
+FROM Dates
+JOIN ClanWars ON Dates.DateID = ClanWars.DateID
+JOIN Donations ON ClanWars.DateID = Donations.DateID AND ClanWars.MemberID = :memID Donations.MemberID
+JOIN ClanGames ON Donations.DateID = ClanGames.DateID AND Donations.MemberID = ClanGames.MemberID
+WHERE ClanGames.MemberID = '1' ORDER BY Dates.DateID ASC

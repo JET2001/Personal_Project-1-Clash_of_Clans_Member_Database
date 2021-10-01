@@ -1,0 +1,80 @@
+--------- CREATING USERS ------------
+CREATE USER 'ascension'@'localhost' IDENTIFIED BY 'ascension123';
+GRANT ALL ON cocascension.* TO 'ascension'@'localhost';
+
+--------- INSERTING DATA INTO Leaders -----------
+
+INSERT INTO Leaders (username, password) VALUES('Jon', '95f18cc027cdefdd0a00a5f8fd5d4941');
+INSERT INTO Leaders (username, password) VALUES('Jowen', '02d6ca92a9758d58d1f62295d537685a' );
+INSERT INTO Leaders (username, password) VALUES('Raymeo', '718318b7afb939552ab8fd634f377770');
+INSERT INTO Leaders (username, password) VALUES('Gerald', '280bd5a543b6da9297226a4d8d8ec87d' );
+INSERT INTO Leaders (username, password) VALUES('Terence','8f9f32a5a435f8717aa82c3ab39314d0');
+
+
+--------- INSERTING DATA INTO Dates ----------------
+INSERT INTO Dates (Date) VALUES ('Jan/2021');
+INSERT INTO Dates (Date) VALUES ('Feb/2021');
+INSERT INTO Dates (Date) VALUES ('Mar/2021');
+INSERT INTO Dates (Date) VALUES ('Apr/2021');
+INSERT INTO Dates (Date) VALUES ('May/2021');
+INSERT INTO Dates (Date) VALUES ('Jun/2021');
+INSERT INTO Dates (Date) VALUES ('Jul/2021');
+INSERT INTO Dates (Date) VALUES ('Aug/2021');
+INSERT INTO Dates (Date) VALUES ('Sep/2021');
+INSERT INTO Dates (Date) VALUES ('Oct/2021');
+INSERT INTO Dates (Date) VALUES ('Nov/2021');
+INSERT INTO Dates (Date) VALUES ('Dec/2021');
+
+------- INSERTING DATA INTO Positions ---------------
+INSERT INTO Positions (Name) VALUES ('Leader');
+INSERT INTO Positions (Name) VALUES ('Elder');
+INSERT INTO Positions (Name) VALUES ('Member');
+
+------- INSERTING ACTUAL DATA INTO MEMBERS --------------
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'Hammy', '13');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'ALLYelephant', '13');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'TMD Terror', '13');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('1', 'Rayollz', '13');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('1', 'Arenes', '13');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('1', 'Ole2killu', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'Desloki', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('1', 'Mr Gneiss Guy', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('1', 'Aries', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'Swift Justice', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', '@Zeus', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'MTG', '13');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'Ed-Ed-Ed', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'Raphael', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'Imfat', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'How Dare You', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'YuZhi', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'FY140726', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'mixedgrill', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'Best Friend', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'WWH', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'Myper', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'Aspect', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'Etzurmum', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'ItzMisterMan', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'MR PEKKA', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'xperthief', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'zucc', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'alexa', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'Anonymously', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'Qeple', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'Kimon', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'bharath', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'cig bock', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'MagicMan', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'lordAWESOME2814', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'zech', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'Ryan', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'vishal', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'youthinkley', '11');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'edward', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'booperdooper', '9');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'ItzEngineero', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'LvinxHC', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'yucheng', '10');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('3', 'STELTH ASSASIN2', '12');
+INSERT INTO Members (PositionID, IGN, Thlvl) VALUES ('2', 'wwhy', '11');

@@ -1,0 +1,89 @@
+CREATE DATABASE cocascension;
+GRANT ALL PRIVILEGES ON cocascension.* TO 'cocascension'@'localhost';
+
+--------- CREATING TABLE FOR LEADERS -------------
+--------- This table is to be used for logging into the database. -----
+
+CREATE TABLE Leaders (
+    LeaderID SMALLINT NOT NULL AUTO_INCREMENT UNIQUE,
+    username VARCHAR(20),
+    password VARBINARY(50),
+    PRIMARY KEY(LeaderID)
+)ENGINE = InnoDB CHARACTER SET utf8;
+
+--------- CREATING ALL END TABLES -------
+
+CREATE TABLE Positions (
+    PositionID SMALLINT NOT NULL AUTO_INCREMENT UNIQUE,
+    Position VARCHAR(8) DEFAULT NULL,
+    PRIMARY KEY (PositionID)
+)ENGINE=InnoDB CHARACTER SET utf8;
+
+
+CREATE TABLE Dates(
+    DateID SMALLINT NOT NULL AUTO_INCREMENT UNIQUE,
+    Date TEXT,
+    PRIMARY KEY(DateID)
+)ENGINE=InnoDB CHARACTER SET utf8;
+
+
+----------- CREATING TABLE FOR MEMBERS -------------------
+CREATE TABLE Members (
+    MemberID SMALLINT NOT NULL AUTO_INCREMENT UNIQUE,
+    PositionID SMALLINT,
+    IGN VARCHAR(50) NOT NULL,
+    TeleName VARCHAR(50),
+    Thlvl SMALLINT NOT NULL,
+    Bio TEXT,
+    Strategies TEXT,
+    PRIMARY KEY(MemberID),
+    CONSTRAINT members_ibfk_1
+    FOREIGN KEY (PositionID) REFERENCES Positions(PositionID) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB CHARACTER SET utf8;
+
+----------- CREATING TABLE FOR Clan Games  ----------------
+CREATE TABLE ClanGames (
+    CgID SMALLINT NOT NULL AUTO_INCREMENT UNIQUE,
+    DateID SMALLINT,
+    MemberID SMALLINT,
+    Points INT DEFAULT NULL,
+    PRIMARY KEY (CgID),
+
+    FOREIGN KEY (DateID) REFERENCES Dates(DateID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB CHARACTER SET utf8;
+
+----------- CREATING TABLE FOR Clan Wars -------------------
+CREATE TABLE ClanWars (
+    CwID SMALLINT NOT NULL AUTO_INCREMENT UNIQUE,
+    DateID INT
+    MemberID INT,
+    Count SMALLINT NOT NULL,
+    PRIMARY KEY(CWID),
+    CONSTRAINT clanwars_ibfk_1 FOREIGN KEY (DateID)
+    REFERENCES Dates(DateID) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT clanwars_ibfk_2 FOREIGN KEY (MemberID)
+    REFERENCES Members(MemberID) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB CHARACTER SET utf8;
+
+------------ CREATING TABLE FOR Donations -------------------
+CREATE TABLE Donations (
+    DonationID SMALLINT NOT NULL AUTO_INCREMENT UNIQUE,
+    DateID SMALLINT,
+    MemberID SMALLINT,
+    Donated INT,
+    Received INT,
+    Net INT,
+    PRIMARY KEY(DonationID),
+    CONSTRAINT donations_ibfk_1
+    FOREIGN KEY (DateID) REFERENCES Dates(DateID) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT donations_ibfk_2
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB CHARACTER SET utf8;
+
+
+----------- PDO.PHP ----------------
+In your pdo.php file, run the following command:
+<?php
+$pdo = new PDO('mysql:host='cocascension.byethost31.com';port=8889;dbname=b31_28045229_cocascension', 'b31_28045229', 'a1s2c3e45678');
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
