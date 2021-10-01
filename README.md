@@ -1,4 +1,4 @@
-# Clash-of-Clans-Member-Database
+# Clash of Clans Member Database
 Project Duration: 16 Feb 2021 - 2 Mar 2021
 ### Project Description
 A Clan in the game _Clash of Clans_ refers to a group of players that join together to compete with other clans in two ways: the first is to pool trophies together, and the second is to win Clan Wars for loot and Clan XP. There are many of such _Clans_ in the game Clash of Clans. 
